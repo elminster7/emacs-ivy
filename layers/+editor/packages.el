@@ -10,6 +10,16 @@
 
 
 ;; ▶ Editor ---------------------------------------
+
+;; windows move bind key
+(defun editor/winmove-init ()
+  "window move init"
+  (use-package winmove
+    :bind (("C-c <right>" . windmove-right)
+	   ("C-c <left>" . windmove-left)
+	   ("C-c <up>" . windmove-up)
+	   ("C-c <down>" . windmove-down))
+    ))
 (defun editor/function-args ()
   ""
   )
@@ -37,7 +47,7 @@
   (editor/function-args)
   (editor/language-encoding)
   (editor/column)
-  )
+  (editor/winmove-init))
 
 ;; ▶ Interface ---------------------------------------
 
