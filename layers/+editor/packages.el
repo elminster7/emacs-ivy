@@ -10,6 +10,18 @@
 
 
 ;; ▶ Editor ---------------------------------------
+;; linum display left margin.
+(defun editor/linum ()
+  "left margin linum"
+  (use-package linum
+    :ensure t
+    :init
+    (global-hl-line-mode +1)
+    (setq linum-format "%-4d")
+    (column-number-mode t)
+    (size-indication-mode t)
+    )
+  )
 
 ;; windows move bind key
 (defun editor/winmove-init ()
@@ -47,7 +59,8 @@
   (editor/function-args)
   (editor/language-encoding)
   (editor/column)
-  (editor/winmove-init))
+  (editor/winmove-init)
+  (editor/linum))
 
 ;; ▶ Interface ---------------------------------------
 
@@ -79,7 +92,7 @@
     :ensure t
     :init (add-hook 'c-mode-hook 'counsel-gtags-mode)
     (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    :bind (("M-." . counsel-gtags-find-definition)
+    :bind (("M-." . counsel-gtags-find-dwim)
 	   ("M-r" . counsel-gtags-find-reference)
 	   ("M-s" . counsel-gtags-find-symbol)
 	   ("M-t" . counsel-gtags-go-backward))
