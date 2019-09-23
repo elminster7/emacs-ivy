@@ -30,8 +30,11 @@
     :bind (("C-c <right>" . windmove-right)
 	   ("C-c <left>" . windmove-left)
 	   ("C-c <up>" . windmove-up)
-	   ("C-c <down>" . windmove-down))
-    ))
+	   ("C-c <down>" . windmove-down)
+	   ("C-i" . grep-find))
+    )
+  )
+  
 (defun editor/function-args ()
   ""
   )
