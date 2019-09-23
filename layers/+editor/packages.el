@@ -79,7 +79,7 @@
     :ensure t
     :init (add-hook 'c-mode-hook 'counsel-gtags-mode)
     (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    :bind (("M-." . counsel-gtags-find-dwim)
+    :bind (("M-." . counsel-gtags-find-definition)
 	   ("M-r" . counsel-gtags-find-reference)
 	   ("M-s" . counsel-gtags-find-symbol)
 	   ("M-t" . counsel-gtags-go-backward))
