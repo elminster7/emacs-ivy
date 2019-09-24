@@ -10,6 +10,15 @@
 
 
 ;; ▶ Editor ---------------------------------------
+
+;; symbol function imenu
+(defun editor/popup-imenu ()
+  "symbol function for imenu."
+  (use-package popup-imenu
+  :ensure t
+  :bind (("C-f" . popup-imenu))
+  ))
+
 ;; linum display left margin.
 (defun editor/linum ()
   "left margin linum"
@@ -32,6 +41,15 @@
 	   ("C-c <up>" . windmove-up)
 	   ("C-c <down>" . windmove-down)
 	   ("C-i" . grep-find))
+    )
+  )
+
+;; emacs window manager
+(defun editor/e2wm ()
+  "window manager for emacs."
+  (use-package e2wm
+    :ensure t
+    :bind (("M-+" . e2wm:start-management))
     )
   )
   
@@ -63,7 +81,16 @@
   (editor/language-encoding)
   (editor/column)
   (editor/winmove-init)
-  (editor/linum))
+  (editor/linum)
+  (editor/dired-settings)
+  (editor/e2wm)
+  (editor/popup-imenu)
+  )
+
+(defun editor/dired-settings ()
+  "dired copy setting."
+  (setq dired-dwim-target t)
+  )
 
 ;; ▶ Interface ---------------------------------------
 
@@ -95,12 +122,29 @@
     :ensure t
     :init (add-hook 'c-mode-hook 'counsel-gtags-mode)
     (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    :bind (("M-." . counsel-gtags-find-dwim)
+    :bind (("M-." . counsel-gtags-dwim)
 	   ("M-r" . counsel-gtags-find-reference)
 	   ("M-s" . counsel-gtags-find-symbol)
 	   ("M-t" . counsel-gtags-go-backward))
     )
   )
+
+(defun cscope/init-xcscope ()
+  "cscope package install"
+  (use-package xcscope
+    :ensure t
+    :init
+    (add-hook 'c-mode-hook 'xcscope-mode)
+    (add-hook 'c++-mode-hook 'xcscope-mode)
+    (add-hook 'asm-mode-hook 'xcscope-mode)
+    :bind
+    (("C-c c" . cscope-find-calling-this-symbol)
+     ("C-c ]" . cscope-find-global-definition)
+     ("C-c [" . cscope-pop-mark)
+     ("C-c t" . cscope-find-this-text-string)
+     ("C-c n" . cscope-find-egrep-pattern))
+    ))
+
   
 ;; init editor env.
 (defun editor/init ()
@@ -108,6 +152,7 @@
   ;; interface -----------------
   (interface/ivy)
   (counsel/gtags)
+  (cscope/init-xcscope)
   ;; Tools ---------------------
   (tools/multiplecursor)
   ;; Editor --------------------
