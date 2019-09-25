@@ -24,10 +24,10 @@
   "nlinum install"
   (use-package nlinum
     :ensure t
-;;    :init ((setq nlinum-format "%4d")
-;;	   (global-hl-line-mode 1)
-    ;;	   (set-face-background 'hl-line "darkblue"))))
-    ))
+    :init
+    (require 'nlinum)
+    (set-face-background 'hl-line "yellow")
+    (global-nlinum-mode t)))
 
 ;; ▼ ECB
     (defun editor/ecb ()
