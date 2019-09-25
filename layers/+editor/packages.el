@@ -29,6 +29,7 @@
   (setq stack-trace-on-error t)
   (setq ecb-version-check nil)
   (setq ecb-compile-window-height 15)
+  (setq ecb-windows-width 0.20)
   (bind-key "M-1" 'ecb-goto-window-sources)
   (bind-key "M-2" 'ecb-goto-window-history)
   (bind-key "M-0" 'ecb-goto-window-edit1))
