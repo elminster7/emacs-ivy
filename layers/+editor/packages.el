@@ -19,6 +19,21 @@
   :bind (("C-f" . popup-imenu))
   ))
 
+;; ▼ ECB
+(defun editor/ecb ()
+  "ECB IDE init"
+  (use-package ecb
+    :ensure t)
+  :init (setq ecb-layout-name "right5")
+  (setq ecb-examples-bufferinfo-buffer-name nil)
+  (setq stack-trace-on-error t)
+  (setq ecb-version-check nil)
+  (setq ecb-compile-window-height 15)
+  (bind-key "M-1" 'ecb-goto-window-sources)
+  (bind-key "M-2" 'ecb-goto-window-history)
+  (bind-key "M-0" 'ecb-goto-window-edit1))
+
+
 ;; linum display left margin.
 (defun editor/linum ()
   "left margin linum"
@@ -92,6 +107,7 @@
   (editor/e2wm)
   (editor/popup-imenu)
   (editor/load-error-settings)
+  (editor/ecb)
   )
 
 (defun editor/dired-settings ()
