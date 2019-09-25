@@ -69,7 +69,7 @@
   "ripgrep init"
   (use-package ripgrep
     :ensure t
-    :bind (("C-p" . ripgrep))
+    :bind (("C-p" . ripgrep-regexp))
     ))
 
 ;; emacs window manager
