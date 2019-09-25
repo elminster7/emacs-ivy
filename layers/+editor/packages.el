@@ -32,6 +32,12 @@
     )
   )
 
+;; package signature
+(defun editor/load-error-settings ()
+  "load error settings"
+  (setq package-check-signature t)
+  )
+
 ;; windows move bind key
 (defun editor/winmove-init ()
   "w:indow move init"
@@ -85,6 +91,7 @@
   (editor/dired-settings)
   (editor/e2wm)
   (editor/popup-imenu)
+  (editor/load-error-settings)
   )
 
 (defun editor/dired-settings ()
