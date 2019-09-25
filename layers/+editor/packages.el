@@ -35,7 +35,7 @@
 ;; package signature
 (defun editor/load-error-settings ()
   "load error settings"
-  (setq package-check-signature t)
+  (setq package-check-signature nil)
   )
 
 ;; windows move bind key
