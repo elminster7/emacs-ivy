@@ -166,8 +166,7 @@
    telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
   (setq telephone-line-height 20
    telephone-line-evil-use-short-tag t)
-  (telephone-line-mode t)
-  ))
+  (telephone-line-mode)))
 
 ;; ▼ powerline evil
 (defun appear/powerline ()
@@ -180,8 +179,7 @@
 
 (defun appear/init-functions ()
   "init appear function."
-  (appear/telephone-init)
-  (appear/powerline))
+)
 
 ;; init editor env.
 (defun editor/init ()
