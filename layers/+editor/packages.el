@@ -145,7 +145,7 @@
     (add-hook 'c++-mode-hook 'xcscope-mode)
     (add-hook 'asm-mode-hook 'xcscope-mode)
     :bind
-    (("C-c c" . cscope-find-functions-calling-this-symbol)
+    (("C-c c" . cscope-find-functions-calling-this-function)
      ("C-c ]" . cscope-find-global-definition)
      ("C-c [" . cscope-pop-mark)
      ("C-c t" . cscope-find-this-text-string)
