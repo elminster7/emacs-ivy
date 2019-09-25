@@ -61,9 +61,15 @@
 	   ("C-c <left>" . windmove-left)
 	   ("C-c <up>" . windmove-up)
 	   ("C-c <down>" . windmove-down)
-	   ("C-i" . grep-find))
-    )
-  )
+	   )))
+  
+;; ripgrep search
+(defun editor/ripgrep ()
+  "ripgrep init"
+  (use-package ripgrep
+    :ensure t
+    :bind (("C-p" . ripgrep))
+    ))
 
 ;; emacs window manager
 (defun editor/e2wm ()
@@ -108,6 +114,7 @@
   (editor/popup-imenu)
   (editor/load-error-settings)
   (editor/ecb)
+  (editor/ripgrep)
   )
 
 (defun editor/dired-settings ()
