@@ -15,25 +15,42 @@
 (defun editor/popup-imenu ()
   "symbol function for imenu."
   (use-package popup-imenu
-  :ensure t
-  :bind (("C-f" . popup-imenu))
-  ))
+    :ensure t
+    :bind (("C-f" . popup-imenu))
+    ))
+
+;; nlinum function setting.
+(defun editor/nlinum ()
+  "nlinum install"
+  (use-package nlinum
+    :ensure t
+;;    :init ((setq nlinum-format "%4d")
+;;	   (global-hl-line-mode 1)
+    ;;	   (set-face-background 'hl-line "darkblue"))))
+    ))
 
 ;; ▼ ECB
-(defun editor/ecb ()
-  "ECB IDE init"
-  (use-package ecb
-    :ensure t)
-  :init (setq ecb-layout-name "right5")
-  (setq ecb-examples-bufferinfo-buffer-name nil)
-  (setq stack-trace-on-error t)
-  (setq ecb-version-check nil)
-  (setq ecb-compile-window-height 15)
-  (setq ecb-windows-width 0.20)
-  (bind-key "M-1" 'ecb-goto-window-sources)
-  (bind-key "M-2" 'ecb-goto-window-history)
-  (bind-key "M-0" 'ecb-goto-window-edit1))
-
+    (defun editor/ecb ()
+      "ECB IDE init"
+      (use-package ecb
+	:ensure t
+	:init (setq ecb-layout-name "right5")
+	(setq ecb-examples-bufferinfo-buffer-name nil)
+	(setq stack-trace-on-error t)
+	(setq ecb-version-check nil)
+	(setq ecb-compile-window-height 12)
+	(setq ecb-windows-width 0.20)
+	(bind-key "M-1" 'ecb-goto-window-sources)
+	(bind-key "M-2" 'ecb-goto-window-history)
+	(bind-key "M-0" 'ecb-goto-window-edit1)
+	;; semantic settings
+	(semantic-mode t)
+	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+	(global-semanticdb-minor-mode t)
+	(global-semantic-stickyfunc-mode t)
+	(global-semantic-highlight-func-mode t)
+	(global-semantic-decoration-mode t)))
 
 ;; linum display left margin.
 (defun editor/linum ()
@@ -116,6 +133,7 @@
   (editor/load-error-settings)
   (editor/ecb)
   (editor/ripgrep)
+  (editor/nlinum)
   )
 
 (defun editor/dired-settings ()
