@@ -34,7 +34,7 @@
 
 ;; windows move bind key
 (defun editor/winmove-init ()
-  "window move init"
+  "w:indow move init"
   (use-package winmove
     :bind (("C-c <right>" . windmove-right)
 	   ("C-c <left>" . windmove-left)
@@ -146,7 +146,6 @@
     ))
 
 ;; Appearance ----------------------------------------------------------
-(
   
 ;; init editor env.
 (defun editor/init ()
