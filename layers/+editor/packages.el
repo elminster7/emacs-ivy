@@ -154,7 +154,35 @@
     ))
 
 ;; Appearance ----------------------------------------------------------
-  
+  ;; ▼ telephone-line
+(defun appear/telephone-init ()
+ "telephone line init"
+ (use-package telephone-line
+  :ensure t
+  :init 
+  (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+   telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+   telephone-line-primary-right-separator 'telephone-line-cubed-right
+   telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+  (setq telephone-line-height 20
+   telephone-line-evil-use-short-tag t)
+  (telephone-line-mode t)
+  ))
+
+;; ▼ powerline evil
+(defun appear/powerline ()
+  "powerline evil"
+  (use-package powerline-evil
+    :ensure t
+    :init (evil-mode 1)
+    (powerline-default-theme)
+    ))
+
+(defun appear/init-functions ()
+  "init appear function."
+  (appear/telephone-init)
+  (appear/powerline))
+
 ;; init editor env.
 (defun editor/init ()
   "Editor envirment init"
@@ -166,4 +194,6 @@
   (tools/multiplecursor)
   ;; Editor --------------------
   (editor/init-functions)
+  ;; Appear
+  (appear/init-functions)
   )
