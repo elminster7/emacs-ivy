@@ -75,6 +75,17 @@
   (add-hook 'c++-mode-hook 'linux-c-indent)
   )
 
+(defun editor/smartparens ()
+  "smartparen mode"
+  (use-package smartparens
+    :ensure t
+    :diminish smartparens-mode
+    :config
+    (progn
+      (require 'smartparens-config)
+      (smartparens-global-mode 1)))
+  )
+
 ;; ▼ yasnippet
 (defun editor/yasnippet ()
   "yasnippet init"
@@ -98,6 +109,16 @@
      (lambda ()
        (setq ac-sources
              (append '(ac-source-yasnippet) ac-sources)))))
+  )
+
+(defun editor/rainbow-delimiters ()
+  "rainbow-delimiters"
+  (use-package rainbow-delimiters
+    :ensure t
+    :defer t
+    :init
+    (progn
+      (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)))
   )
 
 ;; linum display left margin.
@@ -128,7 +149,7 @@
 	   ("C-c <up>" . windmove-up)
 	   ("C-c <down>" . windmove-down)
 	   )))
-  
+
 ;; ripgrep search
 (defun editor/ripgrep ()
   "ripgrep init"
@@ -209,6 +230,8 @@
   (editor/auto-highlight-symbol)
   (editor/flycheck)
   (editor/linux-c-indent)
+  (editor/smartparens)
+  (editor/rainbow-delimiters)
   )
 
 (defun editor/dired-settings ()
