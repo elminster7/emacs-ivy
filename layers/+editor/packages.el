@@ -8,7 +8,6 @@
            ("C-'" . mc/mark-all-words-like-this)))
   )
 
-
 ;; ▶ Editor ---------------------------------------
 
 ;; symbol function imenu
@@ -43,6 +42,8 @@
 	(bind-key "M-1" 'ecb-goto-window-sources)
 	(bind-key "M-2" 'ecb-goto-window-history)
 	(bind-key "M-0" 'ecb-goto-window-edit1)
+	;; disable tip of the day
+	(setq ecb-tip-of-the-day nil)
 	;; semantic settings
 	(semantic-mode t)
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
@@ -51,6 +52,53 @@
 	(global-semantic-stickyfunc-mode t)
 	(global-semantic-highlight-func-mode t)
 	(global-semantic-decoration-mode t)))
+
+;; ▼ CodeComplete ( Autocomplete, yasnippet )
+(defun editor/autocomplete ()
+  "autocomplete init"
+  (use-package auto-complete
+    :ensure t
+    :init (ac-config-default)
+    (global-auto-complete-mode t)
+    (setq ac-auto-start 1)
+    (setq ac-auto-show-menu 0.1)
+    (ac-set-trigger-key "TAB"))
+  )
+
+(defun editor/linux-c-indent ()
+  "adjusted defaults for C/C++ mode use with the Linux kernel."
+  (interactive)
+  (setq indent-tabs-mode nil) 
+  (setq c-basic-offset 4)
+  (add-hook 'c-mode-hook 'linux-c-indent)
+  (add-hook 'c-mode-hook (lambda() (c-set-style "gnu")))
+  (add-hook 'c++-mode-hook 'linux-c-indent)
+  )
+
+;; ▼ yasnippet
+(defun editor/yasnippet ()
+  "yasnippet init"
+  (use-package yasnippet
+    :ensure t
+    :defer t
+    :diminish yas-minor-mode
+    :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+    :init
+    (progn
+      (setq yas-verbosity 3)
+      (yas-global-mode 1))
+    (add-hook 'term-mode-hook (lambda() (setq yas-dont-activate t)))
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "C-c y") 'yas-expand)
+    (ac-set-trigger-key "TAB")
+    (ac-set-trigger-key "<tab>")
+    (add-hook
+     'prog-mode-hook
+     (lambda ()
+       (setq ac-sources
+             (append '(ac-source-yasnippet) ac-sources)))))
+  )
 
 ;; linum display left margin.
 (defun editor/linum ()
@@ -120,6 +168,28 @@
 		whitespace-style '(face lines-tail))
   (add-hook 'prog-mode-hook 'whitespace-mode))
 
+;; auto-highlight-symbol
+(defun editor/auto-highlight-symbol ()
+  "thils only installs it for programming mode derivatives. you can also makeit global.."
+  (use-package auto-highlight-symbol
+    :ensure t
+    :init (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+    (global-auto-highlight-symbol-mode t)
+    :bind (:map auto-highlight-symbol-mode-map
+                ("M-p" . ahs-backward)
+                ("M-n" . ahs-forward)
+                )
+    )
+  )
+
+;; ▼ flycheck
+(defun editor/flycheck ()
+  "flycheck init"
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+  )
+
 (defun editor/init-functions ()
   "init functions function-args, encoding, column"
   (editor/function-args)
@@ -134,6 +204,11 @@
   (editor/ecb)
   (editor/ripgrep)
   (editor/nlinum)
+  (editor/autocomplete)
+  (editor/yasnippet)
+  (editor/auto-highlight-symbol)
+  (editor/flycheck)
+  (editor/linux-c-indent)
   )
 
 (defun editor/dired-settings ()
