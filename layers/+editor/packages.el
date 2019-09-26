@@ -46,12 +46,21 @@
 	(setq ecb-tip-of-the-day nil)
 	;; semantic settings
 	(semantic-mode t)
+	(require 'stickyfunc-enhance)
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
 	(global-semantic-stickyfunc-mode t)
 	(global-semantic-highlight-func-mode t)
 	(global-semantic-decoration-mode t)))
+
+;;  ecb sticky enchance
+(defun editor/stickyenhance ()
+  "ecb stickyfunc-enhance"
+  (use-package stickyfunc-enhance
+    :ensure t
+  )
+)
 
 ;; ▼ CodeComplete ( Autocomplete, yasnippet )
 (defun editor/autocomplete ()
@@ -232,6 +241,9 @@
   (editor/linux-c-indent)
   (editor/smartparens)
   (editor/rainbow-delimiters)
+  (editor/helm-gtags)
+  (editor/helm-cscope)
+  (editor/stickyenhance)
   )
 
 (defun editor/dired-settings ()
@@ -276,6 +288,38 @@
 	   ("M-t" . ggtags-prev-mark)
 	   ("M-n" . ggtags-next-mark))
     )
+  )
+
+;; helm gtags
+(defun editor/helm-gtags ()
+  "helm gtags gnu global"
+  (use-package helm-gtags
+    :ensure t
+    :init (add-hook 'c-mode-hook 'helm-gtags-mode)
+    (add-hook 'c++-mode-hook 'helm-gtags-mode)
+    (add-hook 'php-mode-hook 'helm-gtags-mode)
+    :bind (("M-." . helm-gtags-dwim)
+	   ("M-t" . helm-gtags-pop-stack)
+	   ("M-r" . helm-gtags-find-tags)
+	   ("M-s" . helm-gtags-find-symbol)
+	   ("M-," . helm-gtags-previous-history)
+	   ("M-n" . helm-gtags-next-history)))
+  )
+
+;; helm cscope
+(defun editor/helm-cscope ()
+  "helm cscope"
+  (use-package helm-cscope
+    :ensure t
+    :init
+    (add-hook 'c-mode-hook 'helm-cscope-mode)
+    (add-hook 'c++-mode-hook 'helm-cscope-mode)
+    (add-hook 'asm-mode-hook 'helm-cscope-mode)
+    :bind (("C-c c" . helm-cscope-find-calling-this-function)
+	   ("C-c d" . helm-cscope-find-called-this-function)
+	   ("C-c ]" . helm-cscope-find-global-definition)
+	   ("C-c [" . helm-cscope-pop-mark)
+	   ("C-c e" . helm-cscope-find-egrep-pattern)))
   )
 
 (defun cscope/init-xcscope ()
@@ -327,8 +371,6 @@
   "Editor envirment init"
   ;; interface -----------------
   (interface/ivy)
-  (editor/ggtags)
-  (cscope/init-xcscope)
   ;; Tools ---------------------
   (tools/multiplecursor)
   ;; Editor --------------------
