@@ -264,16 +264,17 @@
     ))
 
 ;; ivy gtags
-(defun counsel/gtags ()
+(defun editor/ggtags ()
   "ivy for GNU global."
-  (use-package counsel-gtags
+  (use-package ggtags
     :ensure t
-    :init (add-hook 'c-mode-hook 'counsel-gtags-mode)
-    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    :bind (("M-." . counsel-gtags-dwim)
-	   ("M-r" . counsel-gtags-find-reference)
-	   ("M-s" . counsel-gtags-find-symbol)
-	   ("M-t" . counsel-gtags-go-backward))
+    :init (add-hook 'c-mode-hook 'ggtags-mode)
+    (add-hook 'c++-mode-hook 'ggtags-mode)
+    :bind (("M-." . ggtags-find-tag-dwim)
+	   ("M-r" . ggtags-find-reference)
+	   ("M-s" . ggtags-find-other-symbol)
+	   ("M-t" . ggtags-prev-mark)
+	   ("M-n" . ggtags-next-mark))
     )
   )
 
@@ -326,7 +327,7 @@
   "Editor envirment init"
   ;; interface -----------------
   (interface/ivy)
-  (counsel/gtags)
+  (editor/ggtags)
   (cscope/init-xcscope)
   ;; Tools ---------------------
   (tools/multiplecursor)
