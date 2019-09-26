@@ -47,7 +47,7 @@
 	;; semantic settings
 	(semantic-mode t)
 	(require 'stickyfunc-enhance)
-	(set-face-background 'semantic-highlight-func-current-tag-face "87CEEB")
+	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
