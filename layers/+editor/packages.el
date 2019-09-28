@@ -8,7 +8,6 @@
            ("C-'" . mc/mark-all-words-like-this)))
   )
 
-
 ;; ▶ Editor ---------------------------------------
 
 ;; symbol function imenu
@@ -43,14 +42,94 @@
 	(bind-key "M-1" 'ecb-goto-window-sources)
 	(bind-key "M-2" 'ecb-goto-window-history)
 	(bind-key "M-0" 'ecb-goto-window-edit1)
+	;; disable tip of the day
+	(setq ecb-tip-of-the-day nil)
 	;; semantic settings
 	(semantic-mode t)
+	(require 'stickyfunc-enhance)
+	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
 	(global-semantic-stickyfunc-mode t)
 	(global-semantic-highlight-func-mode t)
 	(global-semantic-decoration-mode t)))
+
+;;  ecb sticky enchance
+(defun editor/stickyenhance ()
+  "ecb stickyfunc-enhance"
+  (use-package stickyfunc-enhance
+    :ensure t
+  )
+)
+
+;; ▼ CodeComplete ( Autocomplete, yasnippet )
+(defun editor/autocomplete ()
+  "autocomplete init"
+  (use-package auto-complete
+    :ensure t
+    :init (ac-config-default)
+    (global-auto-complete-mode t)
+    (setq ac-auto-start 1)
+    (setq ac-auto-show-menu 0.1)
+    (ac-set-trigger-key "TAB"))
+  )
+
+(defun editor/linux-c-indent ()
+  "adjusted defaults for C/C++ mode use with the Linux kernel."
+  (interactive)
+  (setq indent-tabs-mode nil) 
+  (setq c-basic-offset 4)
+  (add-hook 'c-mode-hook 'linux-c-indent)
+  (add-hook 'c-mode-hook (lambda() (c-set-style "gnu")))
+  (add-hook 'c++-mode-hook 'linux-c-indent)
+  )
+
+(defun editor/smartparens ()
+  "smartparen mode"
+  (use-package smartparens
+    :ensure t
+    :diminish smartparens-mode
+    :config
+    (progn
+      (require 'smartparens-config)
+      (smartparens-global-mode 1)))
+  )
+
+;; ▼ yasnippet
+(defun editor/yasnippet ()
+  "yasnippet init"
+  (use-package yasnippet
+    :ensure t
+    :defer t
+    :diminish yas-minor-mode
+    :mode ("/\\.emacs\\.d/snippets/" . snippet-mode)
+    :init
+    (progn
+      (setq yas-verbosity 3)
+      (yas-global-mode 1))
+    (add-hook 'term-mode-hook (lambda() (setq yas-dont-activate t)))
+    (define-key yas-minor-mode-map (kbd "<tab>") nil)
+    (define-key yas-minor-mode-map (kbd "TAB") nil)
+    (define-key yas-minor-mode-map (kbd "C-c y") 'yas-expand)
+    (ac-set-trigger-key "TAB")
+    (ac-set-trigger-key "<tab>")
+    (add-hook
+     'prog-mode-hook
+     (lambda ()
+       (setq ac-sources
+             (append '(ac-source-yasnippet) ac-sources)))))
+  )
+
+(defun editor/rainbow-delimiters ()
+  "rainbow-delimiters"
+  (use-package rainbow-delimiters
+    :ensure t
+    :defer t
+    :init
+    (progn
+      (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)))
+  )
 
 ;; linum display left margin.
 (defun editor/linum ()
@@ -80,7 +159,7 @@
 	   ("C-c <up>" . windmove-up)
 	   ("C-c <down>" . windmove-down)
 	   )))
-  
+
 ;; ripgrep search
 (defun editor/ripgrep ()
   "ripgrep init"
@@ -120,6 +199,28 @@
 		whitespace-style '(face lines-tail))
   (add-hook 'prog-mode-hook 'whitespace-mode))
 
+;; auto-highlight-symbol
+(defun editor/auto-highlight-symbol ()
+  "thils only installs it for programming mode derivatives. you can also makeit global.."
+  (use-package auto-highlight-symbol
+    :ensure t
+    :init (add-hook 'prog-mode-hook 'highlight-symbol-mode)
+    (global-auto-highlight-symbol-mode t)
+    :bind (:map auto-highlight-symbol-mode-map
+                ("M-p" . ahs-backward)
+                ("M-n" . ahs-forward)
+                )
+    )
+  )
+
+;; ▼ flycheck
+(defun editor/flycheck ()
+  "flycheck init"
+  (use-package flycheck
+    :ensure t
+    :init (global-flycheck-mode))
+  )
+
 (defun editor/init-functions ()
   "init functions function-args, encoding, column"
   (editor/function-args)
@@ -134,6 +235,16 @@
   (editor/ecb)
   (editor/ripgrep)
   (editor/nlinum)
+  (editor/autocomplete)
+  (editor/yasnippet)
+  (editor/auto-highlight-symbol)
+  (editor/flycheck)
+  (editor/linux-c-indent)
+  (editor/smartparens)
+  (editor/rainbow-delimiters)
+  (editor/helm-gtags)
+  (editor/helm-cscope)
+  (editor/stickyenhance)
   )
 
 (defun editor/dired-settings ()
@@ -167,17 +278,50 @@
     ))
 
 ;; ivy gtags
-(defun counsel/gtags ()
+(defun editor/ggtags ()
   "ivy for GNU global."
-  (use-package counsel-gtags
+  (use-package ggtags
     :ensure t
-    :init (add-hook 'c-mode-hook 'counsel-gtags-mode)
-    (add-hook 'c++-mode-hook 'counsel-gtags-mode)
-    :bind (("M-." . counsel-gtags-dwim)
-	   ("M-r" . counsel-gtags-find-reference)
-	   ("M-s" . counsel-gtags-find-symbol)
-	   ("M-t" . counsel-gtags-go-backward))
+    :init (add-hook 'c-mode-hook 'ggtags-mode)
+    (add-hook 'c++-mode-hook 'ggtags-mode)
+    :bind (("M-." . ggtags-find-tag-dwim)
+	   ("M-r" . ggtags-find-reference)
+	   ("M-s" . ggtags-find-other-symbol)
+	   ("M-t" . ggtags-prev-mark)
+	   ("M-n" . ggtags-next-mark))
     )
+  )
+
+;; helm gtags
+(defun editor/helm-gtags ()
+  "helm gtags gnu global"
+  (use-package helm-gtags
+    :ensure t
+    :init (add-hook 'c-mode-hook 'helm-gtags-mode)
+    (add-hook 'c++-mode-hook 'helm-gtags-mode)
+    (add-hook 'php-mode-hook 'helm-gtags-mode)
+    :bind (("M-." . helm-gtags-dwim)
+	   ("M-t" . helm-gtags-pop-stack)
+	   ("M-r" . helm-gtags-find-tags)
+	   ("M-s" . helm-gtags-find-symbol)
+	   ("M-," . helm-gtags-previous-history)
+	   ("M-n" . helm-gtags-next-history)))
+  )
+
+;; helm cscope
+(defun editor/helm-cscope ()
+  "helm cscope"
+  (use-package helm-cscope
+    :ensure t
+    :init
+    (add-hook 'c-mode-hook 'helm-cscope-mode)
+    (add-hook 'c++-mode-hook 'helm-cscope-mode)
+    (add-hook 'asm-mode-hook 'helm-cscope-mode)
+    :bind (("C-c c" . helm-cscope-find-calling-this-function)
+	   ("C-c d" . helm-cscope-find-called-this-function)
+	   ("C-c ]" . helm-cscope-find-global-definition)
+	   ("C-c [" . helm-cscope-pop-mark)
+	   ("C-c e" . helm-cscope-find-egrep-pattern)))
   )
 
 (defun cscope/init-xcscope ()
@@ -229,8 +373,6 @@
   "Editor envirment init"
   ;; interface -----------------
   (interface/ivy)
-  (counsel/gtags)
-  (cscope/init-xcscope)
   ;; Tools ---------------------
   (tools/multiplecursor)
   ;; Editor --------------------
