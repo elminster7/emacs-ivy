@@ -162,7 +162,8 @@
 	   ("C-c k" . counsel-ag)
 	   ("C-b" . counsel-ibuffer)
 	   ("C-x l" . counsel-locate)
-	   ("C-c C-r" . ivy-resume))
+	   ("C-c C-r" . ivy-resume)
+	   ("≈" . counsel-M-x))
     ))
 
 ;; ivy gtags
