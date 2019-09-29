@@ -37,7 +37,7 @@
 	(setq ecb-examples-bufferinfo-buffer-name nil)
 	(setq stack-trace-on-error t)
 	(setq ecb-version-check nil)
-	(setq ecb-compile-window-height 12)
+	(setq ecb-compile-window-height 15)
 	(setq ecb-windows-width 0.20)
 	(bind-key "M-1" 'ecb-goto-window-sources)
 	(bind-key "M-2" 'ecb-goto-window-history)
@@ -288,6 +288,12 @@
 	   ))
   )
 
+(defun interface/init-functions ()
+  "interface init functions"
+  (interface/ivy)
+  (interface/counsel)
+  )
+
 ;; ivy gtags
 (defun editor/ggtags ()
   "ivy for GNU global."
@@ -366,6 +372,15 @@
    telephone-line-evil-use-short-tag t)
   (telephone-line-mode)))
 
+;; equake mode
+(defun appear/equake-init ()
+  (use-package equake
+    :ensure t
+    :config
+    :bind (("C-x C-c" . equake-check-if-in-equake-frame-before-closing)
+	   ("C-q" . equake-launch-shell)))
+  )
+
 ;; ▼ powerline evil
 (defun appear/powerline ()
   "powerline evil"
@@ -377,14 +392,14 @@
 
 (defun appear/init-functions ()
   "init appear function."
+  (appear/equake-init)
 )
 
 ;; init editor env.
 (defun editor/init ()
   "Editor envirment init"
   ;; interface -----------------
-  (interface/ivy)
-  (interface/counsel)
+  (interface/init-functions)
   ;; Tools ---------------------
   (tools/multiplecursor)
   ;; Editor --------------------
