@@ -265,7 +265,17 @@
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
     :bind (("C-s" . swiper )
-	   ("M-x" . counsel-M-x)
+	   ("C-c C-r" . ivy-resume)
+	   )
+    ))
+
+;; counsel
+(defun interface/counsel ()
+  "interface counsel package"
+  (use-package counsel
+	       :ensure t
+	       :init
+	       :bind (("M-x" . counsel-M-x)
 	   ("C-x C-f" . counsel-find-file)
 	   ("C-c c" . counsel-compile)
 	   ("C-c g" . counsel-git)
@@ -273,9 +283,10 @@
 	   ("C-c k" . counsel-ag)
 	   ("C-b" . counsel-ibuffer)
 	   ("C-x l" . counsel-locate)
-	   ("C-c C-r" . ivy-resume)
-	   ("≈" . counsel-M-x))
-    ))
+	   ("≈" . counsel-M-x)
+	   ("M-x" . counsel-M-x)
+	   ))
+  )
 
 ;; ivy gtags
 (defun editor/ggtags ()
@@ -373,6 +384,7 @@
   "Editor envirment init"
   ;; interface -----------------
   (interface/ivy)
+  (interface/counsel)
   ;; Tools ---------------------
   (tools/multiplecursor)
   ;; Editor --------------------
