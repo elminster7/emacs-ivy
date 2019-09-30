@@ -250,6 +250,7 @@
 (defun editor/dired-settings ()
   "dired copy setting."
   (setq dired-dwim-target t)
+  (bind-key "C-h" 'find-name-dired)
   )
 
 ;; ▶ Interface ---------------------------------------
@@ -377,8 +378,7 @@
   (use-package equake
     :ensure t
     :config
-    :bind (("C-x C-c" . equake-check-if-in-equake-frame-before-closing)
-	   ("C-q" . equake-launch-shell)))
+    :bind (("C-q" . equake-launch-shell)))
   )
 
 ;; ▼ powerline evil
