@@ -381,6 +381,24 @@
     :bind (("C-q" . equake-launch-shell)))
   )
 
+;; ▼ highlight-indent-guides
+(defun appear/highlight-indent-init ()
+  "highlight indent guide"
+  (use-package highlight-indent-guides
+    :ensure t
+    :config (add-hook 'c-mode-hook 'highlight-indent-guides-mode)
+    (add-hook 'c++-mode-hook 'highlight-indent-guides-mode)
+    (add-hook 'shell-script-mode 'highlight-indent-guides-mode)
+    (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
+    :init (setq highlight-indent-guides-method 'character)
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+    (setq highlight-indent-guides-delay 0)
+    (setq highlight-indent-guides-auto-odd-face-perc 15)
+    (setq highlight-indent-guides-auto-even-face-perc 15)
+    (setq highlight-indent-guides-auto-character-face-perc 20)
+    )
+  )
+
 ;; ▼ powerline evil
 (defun appear/powerline ()
   "powerline evil"
@@ -393,6 +411,7 @@
 (defun appear/init-functions ()
   "init appear function."
   (appear/equake-init)
+  (appear/highlight-indent-init)
 )
 
 ;; init editor env.

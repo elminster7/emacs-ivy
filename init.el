@@ -32,7 +32,7 @@
  '(ecb-options-version "2.50")
  '(package-selected-packages
    (quote
-    (ecb minibuf-isearch neotree ripgrep elgrep popup-imenu e2wm multiple-cursors xcscope counsel-gtags ivy use-package))))
+    (equake vimish-fold evil-visual-mark-mode popwin counsel-projectile avy avy-menu yequake ecb minibuf-isearch neotree ripgrep elgrep popup-imenu e2wm multiple-cursors xcscope counsel-gtags ivy use-package))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
