@@ -392,7 +392,7 @@
     (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
     :init (setq highlight-indent-guides-method 'character)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-    (setq highlight-indent-guides-delay 0)
+    (setq highlight-indent-guides-delay 3)
     (setq highlight-indent-guides-auto-odd-face-perc 15)
     (setq highlight-indent-guides-auto-even-face-perc 15)
     (setq highlight-indent-guides-auto-character-face-perc 20)
