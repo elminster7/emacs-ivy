@@ -229,7 +229,7 @@
   (editor/winmove-init)
   (editor/linum)
   (editor/dired-settings)
-  (editor/e2wm)
+;;  (editor/e2wm)
   (editor/popup-imenu)
   (editor/load-error-settings)
   (editor/ecb)
