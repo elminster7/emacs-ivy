@@ -50,10 +50,10 @@
 	(require 'stickyfunc-enhance)
 	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
 	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
-	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
+;;	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
-	(global-semantic-stickyfunc-mode t)
+;;	(global-semantic-stickyfunc-mode t)
 	(global-semantic-highlight-func-mode t)
 	(global-semantic-decoration-mode t)))
 
@@ -62,6 +62,7 @@
   "ecb stickyfunc-enhance"
   (use-package stickyfunc-enhance
     :ensure t
+    :init (tabbar-mode t)
   )
 )
 
@@ -192,6 +193,15 @@
   ""
   )
 
+;; tabbar mode
+(defun editor/tabbar-ruler ()
+  "tabbar mode"
+  (use-package tabbar-ruler
+    :ensure t
+;;    :init ((setq tabbar-ruler-global-tabbar t))
+    :bind ("C-c t" . tabbar-ruler-move)
+  ))
+
 ;; encoding settings
 (defun editor/language-encoding ()
   "language-encoding init"
@@ -257,6 +267,7 @@
   (editor/helm-cscope)
   (editor/stickyenhance)
   (editor/php-mode)
+  (editor/tabbar-ruler)
   )
 
 (defun editor/dired-settings ()
