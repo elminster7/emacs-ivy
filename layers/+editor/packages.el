@@ -26,6 +26,7 @@
     :init
     (require 'nlinum)
     (set-face-background 'hl-line "black")
+    (set-face-foreground 'hl-line "white")
     (global-nlinum-mode t)))
 
 ;; ▼ ECB
