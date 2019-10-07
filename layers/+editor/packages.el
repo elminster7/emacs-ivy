@@ -25,7 +25,7 @@
     :ensure t
     :init
     (require 'nlinum)
-    (set-face-background 'hl-line "yellow")
+    (set-face-background 'hl-line "black")
     (global-nlinum-mode t)))
 
 ;; ▼ ECB
@@ -48,6 +48,7 @@
 	(semantic-mode t)
 	(require 'stickyfunc-enhance)
 	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
+	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
@@ -79,9 +80,9 @@
   "adjusted defaults for C/C++ mode use with the Linux kernel."
   (interactive)
   (setq indent-tabs-mode nil) 
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 8)
   (add-hook 'c-mode-hook 'linux-c-indent)
-  (add-hook 'c-mode-hook (lambda() (c-set-style "gnu")))
+  (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook 'linux-c-indent)
   )
 
