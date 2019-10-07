@@ -85,6 +85,7 @@
   (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook 'linux-c-indent)
+  (add-hook 'phps-mode-hook 'linux-c-indent)
   )
 
 (defun editor/smartparens ()
@@ -131,6 +132,14 @@
     :init
     (progn
       (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode)))
+  )
+
+(defun editor/php-mode ()
+  "php mode settings"
+  (use-package phps-mode
+    :ensure t
+    :init (autoload 'phps-mode "php-mode" "Major mode for editing PHP code." t)
+    (add-to-list 'auto-mode-alist '("\\.php$" . phps-mode)))
   )
 
 ;; linum display left margin.
@@ -247,6 +256,7 @@
   (editor/helm-gtags)
   (editor/helm-cscope)
   (editor/stickyenhance)
+  (editor/php-mode)
   )
 
 (defun editor/dired-settings ()
@@ -304,6 +314,7 @@
     :ensure t
     :init (add-hook 'c-mode-hook 'ggtags-mode)
     (add-hook 'c++-mode-hook 'ggtags-mode)
+    (add-hook 'php-mode-hook 'ggtags-mode)
     :bind (("M-." . ggtags-find-tag-dwim)
 	   ("M-r" . ggtags-find-reference)
 	   ("M-s" . ggtags-find-other-symbol)
@@ -392,6 +403,7 @@
     (add-hook 'c++-mode-hook 'highlight-indent-guides-mode)
     (add-hook 'shell-script-mode 'highlight-indent-guides-mode)
     (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
+    (add-hook 'phps-mode-hook 'highlight-indent-guides-mode)
     :init (setq highlight-indent-guides-method 'character)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
     (setq highlight-indent-guides-delay 3)
