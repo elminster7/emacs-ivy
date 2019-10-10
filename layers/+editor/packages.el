@@ -199,7 +199,7 @@
   (use-package tabbar-ruler
     :ensure t
 ;;    :init ((setq tabbar-ruler-global-tabbar t))
-    :bind ("C-c t" . tabbar-ruler-move)
+    :bind ("C-t" . tabbar-ruler-move)
   ))
 
 ;; encoding settings
@@ -268,6 +268,7 @@
   (editor/stickyenhance)
   (editor/php-mode)
   (editor/tabbar-ruler)
+  (editor/helm-evil-marker)
   )
 
 (defun editor/dired-settings ()
@@ -366,6 +367,16 @@
 	   ("C-c e" . helm-cscope-find-egrep-pattern)))
   )
 
+;; helm evil marker
+(defun editor/helm-evil-marker ()
+  "helm evil marker init"
+  (use-package helm-evil-markers
+    :ensure t
+    :bind (("C-c e" . helm-evil-markers)
+	   ("C-c m" . helm-evil-markers-set))
+    )
+  )
+
 (defun cscope/init-xcscope ()
   "cscope package install"
   (use-package xcscope
@@ -402,7 +413,7 @@
   (use-package equake
     :ensure t
     :config
-    :bind (("C-q" . equake-launch-shell)))
+    :bind (("C-u" . equake-launch-shell)))
   )
 
 ;; ▼ highlight-indent-guides
