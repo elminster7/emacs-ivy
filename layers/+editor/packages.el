@@ -410,14 +410,15 @@
   "highlight indent guide"
   (use-package highlight-indent-guides
     :ensure t
-    :config (add-hook 'c-mode-hook 'highlight-indent-guides-mode)
-    (add-hook 'c++-mode-hook 'highlight-indent-guides-mode)
-    (add-hook 'shell-script-mode 'highlight-indent-guides-mode)
-    (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
-    (add-hook 'phps-mode-hook 'highlight-indent-guides-mode)
+    :config
+;;    (add-hook 'c-mode-hook 'highlight-indent-guides-mode)
+;;    (add-hook 'c++-mode-hook 'highlight-indent-guides-mode)
+;;    (add-hook 'shell-script-mode 'highlight-indent-guides-mode)
+;;    (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
+;;    (add-hook 'phps-mode-hook 'highlight-indent-guides-mode)
     :init (setq highlight-indent-guides-method 'character)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-    (setq highlight-indent-guides-delay 5)
+    (setq highlight-indent-guides-delay 20)
     (setq highlight-indent-guides-auto-odd-face-perc 15)
     (setq highlight-indent-guides-auto-even-face-perc 15)
     (setq highlight-indent-guides-auto-character-face-perc 20)
