@@ -25,6 +25,10 @@
     :ensure t
     :init
     (require 'nlinum)
+    (nlinum-mode 1)
+    (set-face-background 'linum "yellow")
+    (setq nlinum-format "%4d \u2502")
+    (global-hl-line-mode +1)
     (set-face-background 'hl-line "black")
     (set-face-foreground 'hl-line "white")
     (global-nlinum-mode t)))
@@ -152,7 +156,7 @@
     :ensure t
     :init
     (global-hl-line-mode +1)
-    (setq linum-format "%-4d")
+
     (column-number-mode t)
     (size-indication-mode t)
     )
@@ -250,7 +254,7 @@
   (editor/language-encoding)
   (editor/column)
   (editor/winmove-init)
-  (editor/linum)
+;;  (editor/linum)
   (editor/dired-settings)
 ;;  (editor/e2wm)
   (editor/popup-imenu)
