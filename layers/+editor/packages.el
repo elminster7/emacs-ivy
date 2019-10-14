@@ -31,7 +31,9 @@
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "black")
     (set-face-foreground 'hl-line "white")
-    (global-nlinum-mode t)))
+    (global-nlinum-mode t)
+    (setq auto-window-vscroll nil)
+    ))
 
 ;; ▼ ECB
     (defun editor/ecb ()
