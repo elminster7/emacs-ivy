@@ -456,7 +456,7 @@
 (defun appear/init-functions ()
   "init appear function."
   (appear/equake-init)
-  (appear/highlight-indent-init)
+;;  (appear/highlight-indent-init)
 )
 
 ;; init editor env.
