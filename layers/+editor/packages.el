@@ -219,14 +219,28 @@
   (setq coding-system-for-read 'utf-8)
   (setq coding-system-for-write 'utf-8)
   (set-language-environment "UTF-8")
+;;(setq whitespace-space 'underline)
   )
 
 ;; limit line colume.
 (defun editor/column ()
-  "editor row column limit line"
-  (setq-default whitespace-line-column 80
-		whitespace-style '(face lines-tail))
-  (add-hook 'prog-mode-hook 'whitespace-mode))
+ "editor row column limit line"
+ ;;  (setq-default whitespace-line-column 80
+	 ;;		whitespace-style '(face lines-tail))
+ ;;  (add-hook 'prog-mode-hook 'whitespace-mode)
+ ;; Make whitespace-mode with very basic background coloring for whitespaces.
+ ;; http://ergoemacs.org/emacs/whitespace-mode.html
+ (setq whitespace-style (quote (tabs newline space-mark tab-mark newline-mark )))
+
+ ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
+ (setq whitespace-display-mappings
+  ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
+  '(
+	  (space-mark 32 [183] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+	  (newline-mark 10 [182 10]) ; LINE FEED,
+	  (tab-mark 9 [9655 9] [92 9]) ; tab
+   ))
+ )
 
 ;; auto-highlight-symbol
 (defun editor/auto-highlight-symbol ()
@@ -254,10 +268,11 @@
   "init functions function-args, encoding, column"
   (editor/function-args)
   (editor/language-encoding)
-  (editor/column)
+;;  (editor/column)
   (editor/winmove-init)
 ;;  (editor/linum)
   (editor/dired-settings)
+  (editor/column)
 ;;  (editor/e2wm)
   (editor/popup-imenu)
   (editor/load-error-settings)
