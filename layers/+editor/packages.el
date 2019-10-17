@@ -26,8 +26,8 @@
     :init
     (require 'nlinum)
     (nlinum-mode 1)
-    (set-face-background 'linum "dimgray")
-    (set-face-foreground 'linum "white")
+    (set-face-background 'linum "yellow")
+    (set-face-foreground 'linum "red")
     (setq nlinum-format "%4d \u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "dimgray")
@@ -69,7 +69,6 @@
   "hilight symbol init"
   (use-package highlight-symbol
     :ensure t
-    :bind (("C-4" . highlight-symbol-at-point))
     )
   )
 
