@@ -30,7 +30,7 @@
     (set-face-foreground 'linum "red")
     (setq nlinum-format "%4d \u2502")
     (global-hl-line-mode +1)
-    (set-face-background 'hl-line "dimgray")
+    (set-face-background 'hl-line "#353535")
 ;;    (set-face-foreground 'hl-line "white")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
