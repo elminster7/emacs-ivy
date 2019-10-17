@@ -26,7 +26,7 @@
     :init
     (require 'nlinum)
     (nlinum-mode 1)
-    (set-face-background 'linum "yellow")
+    (set-face-background 'linum "dimgray")
     (setq nlinum-format "%4d \u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "black")
@@ -63,6 +63,15 @@
 	(global-semantic-highlight-func-mode t)
 	(global-semantic-decoration-mode t)))
 
+;; highlight symbol
+(defun editor/highlight-symbol-init ()
+  "hilight symbol init"
+  (use-package highlight-symbol
+    :ensure t
+    :bind (("C-4" . highlight-symbol-at-point))
+    )
+  )
+
 ;;  ecb sticky enchance
 (defun editor/stickyenhance ()
   "ecb stickyfunc-enhance"
@@ -84,13 +93,19 @@
     (ac-set-trigger-key "TAB"))
   )
 
+(defun linux-c-indent ()
+  (setq c-basic-offset 8)
+  (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
+  (add-hook 'c++-mode-hook (lambda() (c-set-style "K&R")))
+  (add-hook 'phps-mode-hook (lambda() (c-set-style "K&R")))
+  )
+
 (defun editor/linux-c-indent ()
   "adjusted defaults for C/C++ mode use with the Linux kernel."
   (interactive)
   (setq indent-tabs-mode nil) 
-  (setq c-basic-offset 8)
+
   (add-hook 'c-mode-hook 'linux-c-indent)
-  (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook 'linux-c-indent)
   (add-hook 'phps-mode-hook 'linux-c-indent)
   )
@@ -230,16 +245,19 @@
  ;;  (add-hook 'prog-mode-hook 'whitespace-mode)
  ;; Make whitespace-mode with very basic background coloring for whitespaces.
  ;; http://ergoemacs.org/emacs/whitespace-mode.html
- (setq whitespace-style (quote (tabs newline space-mark tab-mark )))
+ (setq whitespace-space 'underline)
+ (setq whitespace-style (quote (tabs tab-mark big-indent)))
 
  ;; Make whitespace-mode and whitespace-newline-mode use “¶” for end of line char and “▷” for tab.
  (setq whitespace-display-mappings
   ;; all numbers are unicode codepoint in decimal. e.g. (insert-char 182 1)
   '(
-	  (space-mark 32 [46] [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
+	  (space-mark 32 [46]) ; SPACE 32 「 」, 183 MIDDLE DOT 「·」, 46 FULL STOP 「.」
 	  (newline-mark 10 [182 10]) ; LINE FEED,
 	  (tab-mark 9 [9655 9] [92 9]) ; tab
-   ))
+	  (big-indent 32 [46] [46])
+	  ))
+ (global-whitespace-mode 1)
  )
 
 ;; auto-highlight-symbol
@@ -268,11 +286,10 @@
   "init functions function-args, encoding, column"
   (editor/function-args)
   (editor/language-encoding)
-;;  (editor/column)
   (editor/winmove-init)
 ;;  (editor/linum)
   (editor/dired-settings)
-  (editor/column)
+;;  (editor/column)
 ;;  (editor/e2wm)
   (editor/popup-imenu)
   (editor/load-error-settings)
@@ -292,6 +309,7 @@
   (editor/php-mode)
   (editor/tabbar-ruler)
   (editor/helm-evil-marker)
+  (editor/highlight-symbol-init)
   )
 
 (defun editor/dired-settings ()
@@ -451,6 +469,7 @@
 ;;    (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
 ;;    (add-hook 'phps-mode-hook 'highlight-indent-guides-mode)
     :init (setq highlight-indent-guides-method 'character)
+;;   (setq highlight-indent-guides-character ?\|)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
     (setq highlight-indent-guides-delay 20)
     (setq highlight-indent-guides-auto-odd-face-perc 15)
@@ -471,7 +490,8 @@
 (defun appear/init-functions ()
   "init appear function."
   (appear/equake-init)
-;;  (appear/highlight-indent-init)
+  (appear/highlight-indent-init)
+  (setq redisplay-dont-pause t)
 )
 
 ;; init editor env.
