@@ -27,7 +27,7 @@
     (require 'nlinum)
     (nlinum-mode 1)
     (set-face-background 'linum "#fabd2f")
-    (set-face-foreground 'linum "#fb4934")
+    (set-face-foreground 'linum "black")
     (setq nlinum-format "%4d \u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "#353535")
