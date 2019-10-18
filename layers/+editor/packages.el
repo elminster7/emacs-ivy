@@ -26,8 +26,8 @@
     :init
     (require 'nlinum)
     (nlinum-mode 1)
-    (set-face-background 'linum "yellow")
-    (set-face-foreground 'linum "red")
+    (set-face-background 'linum "#fabd2f")
+    (set-face-foreground 'linum "#fb4934")
     (setq nlinum-format "%4d \u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "#353535")
@@ -469,12 +469,12 @@
 ;;    (add-hook 'python-mode-hook 'highlight-indent-guides-mode)
 ;;    (add-hook 'phps-mode-hook 'highlight-indent-guides-mode)
     :init (setq highlight-indent-guides-method 'character)
-;;   (setq highlight-indent-guides-character ?\|)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
-    (setq highlight-indent-guides-delay 20)
+    (setq highlight-indent-guides-delay 10)
     (setq highlight-indent-guides-auto-odd-face-perc 15)
     (setq highlight-indent-guides-auto-even-face-perc 15)
     (setq highlight-indent-guides-auto-character-face-perc 20)
+    :config (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
     )
   )
 
@@ -483,14 +483,15 @@
   "powerline evil"
   (use-package powerline-evil
     :ensure t
-    :init (evil-mode 1)
-    (powerline-default-theme)
+    :init ((require 'powerline-evil)
+	   (powerline-evil-center-color-theme 1))
     ))
 
 (defun appear/init-functions ()
   "init appear function."
   (appear/equake-init)
   (appear/highlight-indent-init)
+;;  (appear/powerline)
   (setq redisplay-dont-pause t)
 )
 
