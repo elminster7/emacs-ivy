@@ -69,6 +69,10 @@
   "hilight symbol init"
   (use-package highlight-symbol
     :ensure t
+    :bind (([f3] . highlight-symbol-at-point)
+    ([f4] . highlight-symbol-remove-all)
+    ("M-<left>" . highlight-symbol-next)
+    ("M-<right>" . highlight-symbol-prev))
     )
   )
 
@@ -99,6 +103,18 @@
   (add-hook 'c++-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'phps-mode-hook (lambda() (c-set-style "K&R")))
   )
+
+(defun editor/default-env ()
+  "default env"
+    (setq auto-mode-alist
+	  (cons '("\\.mak\\'" . makefile-mode) auto-mode-alist))
+    (setq auto-mode-alist
+	  (cons '("\\.bb\\'" . makefile-mode) auto-mode-alist))
+    (setq auto-mode-alist
+	  (cons '("\\.inc\\'" . makefile-mode) auto-mode-alist))
+    (setq auto-mode-alist
+	  (cons '("\\.conf\\'" . makefile-mode) auto-mode-alist))
+    )
 
 (defun editor/linux-c-indent ()
   "adjusted defaults for C/C++ mode use with the Linux kernel."
@@ -310,6 +326,7 @@
   (editor/tabbar-ruler)
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
+  (editor/default-env)
   )
 
 (defun editor/dired-settings ()
@@ -319,6 +336,42 @@
   )
 
 ;; ▶ Interface ---------------------------------------
+
+;; This is a function copied from stackoverflow to facify #if 0/#else/#endif keywords.
+;; The comments are added by myself to make it understandable. 
+(defun my-c-mode-font-lock-if0 (limit)
+  (save-restriction
+    (widen)
+    (save-excursion
+      (goto-char (point-min))
+      (let ((depth 0) str start start-depth)
+	;; Search #if/#else/#endif using regular expression.
+        (while (re-search-forward "^\\s-*#\\s-*\\(if\\|else\\|endif\\)" limit 'move)
+          (setq str (match-string 1))
+	  ;; Handle #if.
+          (if (string= str "if")
+              (progn
+                (setq depth (1+ depth))
+		;; Handle neariest 0.
+                (when (and (null start) (looking-at "\\s-+0"))
+                  (setq start (match-end 0)
+                        start-depth depth)))
+	    ;; Handle #else, here we can decorate #if 0->#else block using 'font-lock-comment-face'.
+            (when (and start (= depth start-depth))
+              (c-put-font-lock-face start (match-beginning 0) 'font-lock-comment-face)
+              (setq start nil))
+	    ;; Handle #endif, return to upper block if possible.
+            (when (string= str "endif")
+              (setq depth (1- depth)))))
+	;; Corner case when there are only #if 0 (May be you are coding now:))
+        (when (and start (> depth 0))
+          (c-put-font-lock-face start (point) 'font-lock-comment-face)))))
+  nil)
+
+(defun my-c-mode-common-hook ()
+  (font-lock-add-keywords
+   nil
+   '((my-c-mode-font-lock-if0 (0 font-lock-comment-face prepend))) 'add-to-end))
 
 ;; ivy is an interactive interface for completion.
 ;; counsel package include ivy, bind-key, swiper.
@@ -493,6 +546,7 @@
   (appear/highlight-indent-init)
 ;;  (appear/powerline)
   (setq redisplay-dont-pause t)
+  (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 )
 
 ;; init editor env.
