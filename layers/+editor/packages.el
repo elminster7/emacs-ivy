@@ -26,9 +26,10 @@
     :init
     (require 'nlinum)
     (nlinum-mode 1)
-    (set-face-background 'linum "#fabd2f")
+    ;;    (set-face-background 'linum "#fabd2f")
+    (set-face-background 'linum "dimgray")
     (set-face-foreground 'linum "black")
-    (setq nlinum-format "%4d \u2502")
+    (setq nlinum-format "%4d\u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "#353535")
 ;;    (set-face-foreground 'hl-line "white")
@@ -98,7 +99,7 @@
   )
 
 (defun linux-c-indent ()
-  (setq c-basic-offset 8)
+  (setq c-basic-offset 4)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'phps-mode-hook (lambda() (c-set-style "K&R")))
