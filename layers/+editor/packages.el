@@ -117,6 +117,16 @@
 	  (cons '("\\.conf\\'" . makefile-mode) auto-mode-alist))
     )
 
+(defun editor/hs-minor-mode ()
+  "hs-minor-mode init"
+  (add-hook 'c-mode-hook 'hs-minor-mode)
+  (add-hook 'c++-mode-hook 'hs-minor-mode)
+  (add-hook 'php-mode-hook 'hs-minor-mode)
+  (bind-key "M-8" 'hs-toggle-hiding)
+  (bind-key "M-0" 'hs-hide-all)
+  (bind-key "M-9" 'hs-show-all)
+  )
+
 (defun editor/linux-c-indent ()
   "adjusted defaults for C/C++ mode use with the Linux kernel."
   (interactive)
@@ -328,6 +338,7 @@
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
   (editor/default-env)
+  (editor/hs-minor-mode)
   )
 
 (defun editor/dired-settings ()
