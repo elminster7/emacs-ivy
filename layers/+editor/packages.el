@@ -33,7 +33,7 @@
     (global-hl-line-mode +1)
 ;;    (set-face-background 'hl-line "#d9dddc")
     ;;    (set-face-foreground 'hl-line "brightblack")
-    (set-face-background 'hl-line "#303030")
+;;    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
     ))
