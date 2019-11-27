@@ -59,7 +59,7 @@
 	(require 'stickyfunc-enhance)
 	;;	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
 	(set-face-background 'semantic-highlight-func-current-tag-face "brightred")
-	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
+;;	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 	(global-semanticdb-minor-mode t)
@@ -336,7 +336,7 @@
   (editor/helm-cscope)
   (editor/stickyenhance)
   (editor/php-mode)
-  (editor/tabbar-ruler)
+;;  (editor/tabbar-ruler)
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
   (editor/default-env)
@@ -554,11 +554,18 @@
 	   (powerline-evil-center-color-theme 1))
     ))
 
+(defun appear/powerline-evil ()
+  "power line center evil."
+  (require 'powerline)
+  (powerline-center-theme)
+  )
+
 (defun appear/init-functions ()
   "init appear function."
   (appear/equake-init)
   (appear/highlight-indent-init)
-;;  (appear/powerline)
+  ;;  (appear/powerline)
+  (appear/powerline-evil)
   (setq redisplay-dont-pause t)
   (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 )
