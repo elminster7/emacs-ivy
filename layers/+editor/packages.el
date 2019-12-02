@@ -101,7 +101,7 @@
   )
 
 (defun linux-c-indent ()
-  (setq c-basic-offset 4)
+  (setq c-basic-offset 8)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'phps-mode-hook (lambda() (c-set-style "K&R")))
@@ -569,6 +569,16 @@
   (setq redisplay-dont-pause t)
   (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 )
+;; ▼ bind keymapping for tool.
+(defun tool/manual-to-man ()
+  "shortcut manual key for man"
+  (bind-key "C-c /" 'man-follow)
+  )
+
+(defun tool/init-functions ()
+  "init tools bindkey"
+  (tool/manual-to-man)
+  )
 
 ;; init editor env.
 (defun editor/init ()
@@ -581,4 +591,6 @@
   (editor/init-functions)
   ;; Appear
   (appear/init-functions)
+  ;; tools
+  (tool/init-functions)
   )
