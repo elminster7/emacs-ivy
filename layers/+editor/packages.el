@@ -43,7 +43,7 @@
       "ECB IDE init"
       (use-package ecb
 	:ensure t
-	:init (setq ecb-layout-name "right5")
+	:init (setq ecb-layout-name "left-symboldef")
 	(setq ecb-examples-bufferinfo-buffer-name nil)
 	(setq stack-trace-on-error t)
 	(setq ecb-version-check nil)
@@ -61,11 +61,12 @@
 	(set-face-background 'semantic-highlight-func-current-tag-face "brightred")
 ;;	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
-	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
-	(global-semanticdb-minor-mode t)
+;;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
+;;	(global-semanticdb-minor-mode t)
 ;;	(global-semantic-stickyfunc-mode t)
 	(global-semantic-highlight-func-mode t)
-	(global-semantic-decoration-mode t)))
+;;	(global-semantic-decoration-mode t))
+      ))
 
 ;; highlight symbol
 (defun editor/highlight-symbol-init ()
@@ -336,7 +337,7 @@
   (editor/helm-cscope)
   (editor/stickyenhance)
   (editor/php-mode)
-;;  (editor/tabbar-ruler)
+  (editor/tabbar-ruler)
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
   (editor/default-env)
