@@ -43,7 +43,7 @@
       "ECB IDE init"
       (use-package ecb
 	:ensure t
-	:init (setq ecb-layout-name "left-symboldef")
+	:init (setq ecb-layout-name "left6")
 	(setq ecb-examples-bufferinfo-buffer-name nil)
 	(setq stack-trace-on-error t)
 	(setq ecb-version-check nil)
@@ -51,6 +51,7 @@
 	(setq ecb-windows-width 0.20)
 	(bind-key "M-1" 'ecb-goto-window-sources)
 	(bind-key "M-2" 'ecb-goto-window-history)
+	(bind-key "M-2" 'ecb-goto-window-methods)
 	(bind-key "M-0" 'ecb-goto-window-edit1)
 	;; disable tip of the day
 	(setq ecb-tip-of-the-day nil)
@@ -101,13 +102,6 @@
     (ac-set-trigger-key "TAB"))
   )
 
-(defun linux-c-indent ()
-  (setq c-basic-offset 8)
-  (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
-  (add-hook 'c++-mode-hook (lambda() (c-set-style "K&R")))
-  (add-hook 'phps-mode-hook (lambda() (c-set-style "K&R")))
-  )
-
 (defun editor/default-env ()
   "default env"
     (setq auto-mode-alist
@@ -134,10 +128,10 @@
   "adjusted defaults for C/C++ mode use with the Linux kernel."
   (interactive)
   (setq indent-tabs-mode nil) 
-
+  (setq c-basic-offset 8)
   (add-hook 'c-mode-hook 'linux-c-indent)
+  (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
   (add-hook 'c++-mode-hook 'linux-c-indent)
-  (add-hook 'phps-mode-hook 'linux-c-indent)
   )
 
 (defun editor/smartparens ()
