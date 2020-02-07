@@ -31,8 +31,8 @@
     (set-face-foreground 'linum "#af8700")
     (setq nlinum-format "%4d\u2502")
     (global-hl-line-mode +1)
-;;    (set-face-background 'hl-line "#d9dddc")
-    ;;    (set-face-foreground 'hl-line "brightblack")
+    (set-face-background 'hl-line "#d9dddc")
+;;        (set-face-foreground 'hl-line "brightblack")
 ;;    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
@@ -59,13 +59,13 @@
 	(semantic-mode t)
 	(require 'stickyfunc-enhance)
 	;;	(set-face-background 'semantic-highlight-func-current-tag-face "blue")
-	(set-face-background 'semantic-highlight-func-current-tag-face "brightred")
+;;	(set-face-background 'semantic-highlight-func-current-tag-face "brightred")
 ;;	(set-face-foreground 'semantic-highlight-func-current-tag-face "black")
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ;;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;;	(global-semanticdb-minor-mode t)
 ;;	(global-semantic-stickyfunc-mode t)
-	(global-semantic-highlight-func-mode t)
+;;	(global-semantic-highlight-func-mode t)
 ;;	(global-semantic-decoration-mode t))
       ))
 
@@ -128,10 +128,18 @@
   "adjusted defaults for C/C++ mode use with the Linux kernel."
   (interactive)
   (setq indent-tabs-mode nil) 
-  (setq c-basic-offset 8)
   (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
+  (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c++-mode-hook 'linux-c-indent)
+  (setq c-basic-offset 8)
+  )
+
+(defun editor/white-space ()
+  "white space column"
+  (setq-default
+   whitespace-line-column 80
+   whitespace-style       '(face lines-tail))
   )
 
 (defun editor/smartparens ()
@@ -336,6 +344,7 @@
   (editor/highlight-symbol-init)
   (editor/default-env)
   (editor/hs-minor-mode)
+  (editor/white-space)
   )
 
 (defun editor/dired-settings ()
