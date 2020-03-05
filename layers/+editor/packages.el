@@ -50,9 +50,9 @@
 		  rtags-rc-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rc"
 		  rtags-use-helm t
 		  rtags-rdm-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rdm")
-    :bind (("M-." . rtags-find-symbol)
+    :bind (("M-." . rtags-find-symbol-at-point)
 ;	   ("C-e" . rtags-find-symbol-at-point)
-	   ("M-r" . rtags-find-references)
+	   ("M-r" . rtags-find-references-at-point)
 ;	   ("C-o" . rtags-find-references-at-point)
 ;	   ("M-s" . rtags-find-file)
 ;	   ("C-v" . rtags-find-virtuals-at-point)
