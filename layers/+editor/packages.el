@@ -38,6 +38,39 @@
     (setq auto-window-vscroll nil)
     ))
 
+;; company rtags
+(defun editor/helm-rtags ()
+  "company rtags"
+  (use-package rtags
+    :ensure t
+    :hook ((c++-mode . rtags-start-process-unless-running)
+    (c-mode . rtags-start-process-unless-running))
+    :config (setq rtags-completions-enabled t
+		  rtags-path "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags.el"
+		  rtags-rc-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rc"
+		  rtags-use-helm t
+		  rtags-rdm-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rdm")
+    :bind (("M-." . rtags-find-symbol)
+;	   ("C-e" . rtags-find-symbol-at-point)
+	   ("M-r" . rtags-find-references)
+;	   ("C-o" . rtags-find-references-at-point)
+;	   ("M-s" . rtags-find-file)
+;	   ("C-v" . rtags-find-virtuals-at-point)
+;	   ("C-F" . rtags-fixit)
+	   ("M-]" . rtags-location-stack-forward)
+	   ("M-[" . rtags-location-stack-back)
+;	   ("C-n" . rtags-next-match)
+;	   ("C-p" . rtags-previous-match)
+;	   ("C-P" . rtags-preprocess-file)
+;	   ("C-R" . rtags-rename-symbol)
+	   ("M-r" . rtags-show-rtags-buffer)
+	   ("M-T" . rtags-print-symbol-info))
+;	   ("C-t" . rtags-symbol-type)
+;	   ("C-I" . rtags-include-file)
+;	   ("C-i" . rtags-get-include-file-for-symbol))
+    :init (setq rtags-display-result-backend 'helm))
+    )
+
 ;; ▼ ECB
     (defun editor/ecb ()
       "ECB IDE init"
@@ -50,9 +83,9 @@
 	(setq ecb-compile-window-height 15)
 	(setq ecb-windows-width 0.20)
 	(bind-key "M-1" 'ecb-goto-window-sources)
-	(bind-key "M-2" 'ecb-goto-window-history)
+	(bind-key "M-3" 'ecb-goto-window-history)
 	(bind-key "M-2" 'ecb-goto-window-methods)
-	(bind-key "M-0" 'ecb-goto-window-edit1)
+	(bind-key "M-0" 'ecb-goto-window-edit0)
 	;; disable tip of the day
 	(setq ecb-tip-of-the-day nil)
 	;; semantic settings
@@ -322,7 +355,8 @@
 ;;  (editor/linum)
   (editor/dired-settings)
 ;;  (editor/column)
-;;  (editor/e2wm)
+  ;;  (editor/e2wm)
+  (editor/helm-rtags)
   (editor/popup-imenu)
   (editor/load-error-settings)
   (editor/ecb)
@@ -335,11 +369,11 @@
   (editor/linux-c-indent)
   (editor/smartparens)
   (editor/rainbow-delimiters)
-  (editor/helm-gtags)
+;;  (editor/helm-gtags)
   (editor/helm-cscope)
   (editor/stickyenhance)
   (editor/php-mode)
-  (editor/tabbar-ruler)
+;  (editor/tabbar-ruler)
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
   (editor/default-env)
@@ -401,7 +435,7 @@
     (ivy-mode 1)
     (setq ivy-use-virtual-buffers t)
     (setq ivy-count-format "(%d/%d) ")
-    :bind (("C-s" . swiper )
+    :bind (("C-s" . swiper-all-thing-at-point )
 	   ("C-c C-r" . ivy-resume)
 	   )
     ))
