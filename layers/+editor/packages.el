@@ -32,8 +32,8 @@
     (setq nlinum-format "%4d\u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "#d9dddc")
-;;        (set-face-foreground 'hl-line "brightblack")
-;;    (set-face-background 'hl-line "#303030")
+       (set-face-foreground 'hl-line "brightblack")
+    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
     ))
@@ -63,8 +63,8 @@
 ;	   ("C-p" . rtags-previous-match)
 ;	   ("C-P" . rtags-preprocess-file)
 ;	   ("C-R" . rtags-rename-symbol)
-	   ("M-r" . rtags-show-rtags-buffer)
-	   ("M-T" . rtags-print-symbol-info))
+	   ("M-s" . rtags-show-rtags-buffer)
+	   ("M-t" . rtags-print-symbol-info))
 ;	   ("C-t" . rtags-symbol-type)
 ;	   ("C-I" . rtags-include-file)
 ;	   ("C-i" . rtags-get-include-file-for-symbol))
@@ -286,8 +286,9 @@
   "tabbar mode"
   (use-package tabbar-ruler
     :ensure t
-;;    :init ((setq tabbar-ruler-global-tabbar t))
-    :bind ("C-t" . tabbar-ruler-move)
+    ;;    :init ((setq tabbar-ruler-global-tabbar t))
+    :init(setq tabbar-mode t)
+       :bind ("C-t" . tabbar-ruler-move)
   ))
 
 ;; encoding settings
@@ -373,7 +374,7 @@
   (editor/helm-cscope)
   (editor/stickyenhance)
   (editor/php-mode)
-;  (editor/tabbar-ruler)
+  (editor/tabbar-ruler)
   (editor/helm-evil-marker)
   (editor/highlight-symbol-init)
   (editor/default-env)
