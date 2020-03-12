@@ -32,10 +32,11 @@
     (setq nlinum-format "%4d\u2502")
     (global-hl-line-mode +1)
     (set-face-background 'hl-line "#d9dddc")
-       (set-face-foreground 'hl-line "brightblack")
-    (set-face-background 'hl-line "#303030")
+;;       (set-face-foreground 'hl-line "brightblack")
+;;    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
+    (setq font-lock-function-name-face 'bold)
     ))
 
 ;; company rtags
@@ -47,9 +48,9 @@
     (c-mode . rtags-start-process-unless-running))
     :config (setq rtags-completions-enabled t
 		  rtags-path "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags.el"
-		  rtags-rc-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rc"
+		  rtags-rc-binary-name "/usr/local/bin/rc"
 		  rtags-use-helm t
-		  rtags-rdm-binary-name "/home/elminster/.emacs.d/elpa/rtags-20200221.36/rtags-2.38/bin/rdm")
+		  rtags-rdm-binary-name "/usr/local/bin/rdm")
     :bind (("M-." . rtags-find-symbol-at-point)
 ;	   ("C-e" . rtags-find-symbol-at-point)
 	   ("M-r" . rtags-find-references-at-point)

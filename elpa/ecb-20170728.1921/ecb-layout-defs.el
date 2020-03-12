@@ -309,7 +309,7 @@ little more place."
 
 ;; Layout left6 -----------------------------------------------------
 
-(ecb-layout-define "left6" left
+(ecb-layout-define "left6" right
   "This function creates the following layout:
 
    -------------------------------------------------------
