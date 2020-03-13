@@ -87,7 +87,6 @@
 	(bind-key "M-3" 'ecb-goto-window-history)
 	(bind-key "M-2" 'ecb-goto-window-methods)
 	(bind-key "M-0" 'ecb-goto-window-edit0)
-	(bind-key "C-c" 'ecb-toggle-compile-window)
 	;; disable tip of the day
 	(setq ecb-tip-of-the-day nil)
 	;; semantic settings
@@ -101,7 +100,8 @@
 ;;	(global-semanticdb-minor-mode t)
 ;;	(global-semantic-stickyfunc-mode t)
 ;;	(global-semantic-highlight-func-mode t)
-;;	(global-semantic-decoration-mode t))
+	;;	(global-semantic-decoration-mode t))
+	:bind 	("C-c h" . 'ecb-toggle-compile-window)
       ))
 
 ;; highlight symbol
