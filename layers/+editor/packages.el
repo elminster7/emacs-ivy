@@ -491,12 +491,12 @@
     :init (add-hook 'c-mode-hook 'helm-gtags-mode)
     (add-hook 'c++-mode-hook 'helm-gtags-mode)
     (add-hook 'php-mode-hook 'helm-gtags-mode)
-    :bind (("C-g ." . helm-gtags-dwim)
-	   ("C-g t" . helm-gtags-pop-stack)
-	   ("C-g r" . helm-gtags-find-tags)
-	   ("C-g s" . helm-gtags-find-symbol)
-	   ("C-g [" . helm-gtags-previous-history)
-	   ("C-g ]" . helm-gtags-next-history)))
+    :bind (("M-g ." . helm-gtags-dwim)
+	   ("M-g t" . helm-gtags-pop-stack)
+	   ("M-g r" . helm-gtags-find-tags)
+	   ("M-g s" . helm-gtags-find-symbol)
+	   ("M-g [" . helm-gtags-previous-history)
+	   ("M-g ]" . helm-gtags-next-history)))
   )
 
 ;; helm cscope
