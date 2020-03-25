@@ -31,11 +31,10 @@
  ;; If there is more than one, they won't work right.
  '(ecb-options-version "2.50")
  '(package-selected-packages
-   (quote
-    (equake vimish-fold evil-visual-mark-mode popwin counsel-projectile avy avy-menu yequake ecb minibuf-isearch neotree ripgrep elgrep popup-imenu e2wm multiple-cursors xcscope counsel-gtags ivy use-package))))
+   '(function-args equake vimish-fold evil-visual-mark-mode popwin counsel-projectile avy avy-menu yequake ecb minibuf-isearch neotree ripgrep elgrep popup-imenu e2wm multiple-cursors xcscope counsel-gtags ivy use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(font-lock-function-name-face ((t (:foreground "brightblue" :weight bold :height 1.2)))))
