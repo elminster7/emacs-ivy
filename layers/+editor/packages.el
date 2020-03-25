@@ -31,7 +31,7 @@
     (set-face-foreground 'linum "#af8700")
     (setq nlinum-format "%4d\u2502")
     (global-hl-line-mode +1)
-    (set-face-background 'hl-line "yellow")
+;;    (set-face-background 'hl-line "yellow")
 ;;    (set-face-background 'hl-line "#d9dddc")
 ;;       (set-face-foreground 'hl-line "brightblack")
 ;;    (set-face-background 'hl-line "#303030")
@@ -39,6 +39,30 @@
     (setq auto-window-vscroll nil)
     (setq font-lock-function-name-face 'bold)
     ))
+
+;; lsp mode
+(defun editor/lsp-package ()
+  "lsp packages"
+  (use-package lsp-ui
+    :ensure t
+    :requires use-package-hydra
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-sideline-enable t)
+    (setq lsp-print-io nil)
+    (setq lsp-prefer-flymake :none)
+    (setq flycheck-checker-error-threshold 10000)
+    (setq lsp-ui-flycheck-enable t)
+    (setq-local flycheck-checker 'python-flake8)
+    (setq lsp-ui-flycheck-list-position 'right)
+    (setq lsp-ui-flycheck-live-reporting t)
+    (setq lsp-ui-peek-enable t)
+    (setq lsp-ui-peek-list-width 60)
+    (setq lsp-ui-peek-peek-height 25)
+    (setq lsp-ui-imenu-enable t)
+    (setq lsp-ui-doc-enable t)
+    (setq lsp-ui-sideline-ignore-duplicate t))
+  )
 
 ;; company rtags
 (defun editor/helm-rtags ()
@@ -53,7 +77,7 @@
 		  rtags-use-helm t
 		  rtags-rdm-binary-name "/usr/local/bin/rdm")
     :bind (("M-." . rtags-find-symbol-at-point)
-;	   ("C-e" . rtags-find-symbol-at-point)
+	   ("M-," . rtags-find-symbol)
 	   ("M-r" . rtags-find-references-at-point)
 ;	   ("C-o" . rtags-find-references-at-point)
 ;	   ("M-s" . rtags-find-file)
@@ -382,6 +406,7 @@
   (editor/default-env)
   (editor/hs-minor-mode)
   (editor/white-space)
+  (editor/lsp-package)
   )
 
 (defun editor/dired-settings ()
