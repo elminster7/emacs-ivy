@@ -437,8 +437,8 @@
   (editor/default-env)
   (editor/hs-minor-mode)
   (editor/white-space)
-  (editor/lsp-mode)
-  (editor/lsp-ui)
+;  (editor/lsp-mode)
+;  (editor/lsp-ui)
   )
 
 (defun editor/dired-settings ()
