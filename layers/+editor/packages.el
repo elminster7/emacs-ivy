@@ -125,8 +125,12 @@
 ;	   ("C-t" . rtags-symbol-type)
 ;	   ("C-I" . rtags-include-file)
 ;	   ("C-i" . rtags-get-include-file-for-symbol))
-    :init (setq rtags-display-result-backend 'helm))
+    :init (setq rtags-display-result-backend 'helm)
+    (add-hook 'c-mode-hook 'xcscope-mode)
+    (add-hook 'c++-mode-hook 'xcscope-mode)
+    (add-hook 'asm-mode-hook 'xcscope-mode)
     )
+  )
 
 ;; ▼ ECB
     (defun editor/ecb ()
@@ -154,9 +158,9 @@
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ;;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;;	(global-semanticdb-minor-mode t)
-;;	(global-semantic-stickyfunc-mode t)
+	(global-semantic-stickyfunc-mode t)
 ;;	(global-semantic-highlight-func-mode t)
-	;;	(global-semantic-decoration-mode t))
+		(global-semantic-decoration-mode t)
 	:bind 	("C-c h" . 'ecb-toggle-compile-window)
       ))
 
