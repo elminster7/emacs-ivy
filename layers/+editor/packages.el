@@ -37,7 +37,6 @@
 ;;    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
-    (setq font-lock-function-name-face 'bold)
     ))
 
 ;; lsp mode
@@ -159,8 +158,8 @@
 ;;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;;	(global-semanticdb-minor-mode t)
 	(global-semantic-stickyfunc-mode t)
-;;	(global-semantic-highlight-func-mode t)
-		(global-semantic-decoration-mode t)
+	(global-semantic-highlight-func-mode t)
+	(global-semantic-decoration-mode t)
 	:bind 	("C-c h" . 'ecb-toggle-compile-window)
       ))
 
@@ -224,7 +223,6 @@
   (setq indent-tabs-mode nil) 
   (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
-  (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c++-mode-hook 'linux-c-indent)
   (setq c-basic-offset 8)
   )
