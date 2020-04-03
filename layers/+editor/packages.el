@@ -37,7 +37,6 @@
 ;;    (set-face-background 'hl-line "#303030")
     (global-nlinum-mode t)
     (setq auto-window-vscroll nil)
-    (setq font-lock-function-name-face 'bold)
     ))
 
 ;; lsp mode
@@ -125,8 +124,12 @@
 ;	   ("C-t" . rtags-symbol-type)
 ;	   ("C-I" . rtags-include-file)
 ;	   ("C-i" . rtags-get-include-file-for-symbol))
-    :init (setq rtags-display-result-backend 'helm))
+    :init (setq rtags-display-result-backend 'helm)
+    (add-hook 'c-mode-hook 'xcscope-mode)
+    (add-hook 'c++-mode-hook 'xcscope-mode)
+    (add-hook 'asm-mode-hook 'xcscope-mode)
     )
+  )
 
 ;; ▼ ECB
     (defun editor/ecb ()
@@ -154,9 +157,9 @@
 	(add-to-list 'semantic-default-submodes 'global-semantic-stickyfunc-mode)
 ;;	(add-to-list 'semantic-default-submodes 'global-semantic-idle-summary-mode)
 ;;	(global-semanticdb-minor-mode t)
-;;	(global-semantic-stickyfunc-mode t)
-;;	(global-semantic-highlight-func-mode t)
-	;;	(global-semantic-decoration-mode t))
+	(global-semantic-stickyfunc-mode t)
+	(global-semantic-highlight-func-mode t)
+	(global-semantic-decoration-mode t)
 	:bind 	("C-c h" . 'ecb-toggle-compile-window)
       ))
 
@@ -220,7 +223,6 @@
   (setq indent-tabs-mode nil) 
   (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c-mode-hook (lambda() (c-set-style "K&R")))
-  (add-hook 'c-mode-hook 'linux-c-indent)
   (add-hook 'c++-mode-hook 'linux-c-indent)
   (setq c-basic-offset 8)
   )
@@ -437,8 +439,8 @@
   (editor/default-env)
   (editor/hs-minor-mode)
   (editor/white-space)
-  (editor/lsp-mode)
-  (editor/lsp-ui)
+;  (editor/lsp-mode)
+;  (editor/lsp-ui)
   )
 
 (defun editor/dired-settings ()
